@@ -1,88 +1,116 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="beforeDescendants"
-	android:focusableInTouchMode="true">
+    android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/server"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="67dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/hint_server_address">
-    </EditText>
-
-    <EditText
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/server"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/hint_username"/>
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/user"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/hint_password"/>
-
-    <Button
-        android:id="@+id/capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="18dp"
-        android:text="@string/button_capture" />
-
-    <SeekBar
-        android:id="@+id/interval_bar"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/password"
-        android:max="60"
-        android:progress="5"
-        android:layout_marginTop="62dp" />
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true" >
 
-    <TextView
-        android:id="@+id/interval_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/interval_bar"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="26dp"
-        android:text="@string/text_interval"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="67dp"
+            android:ems="10"
+            android:hint="@string/hint_server_address"
+            android:inputType="text" >
+        </EditText>
 
-    <TextView
-        android:id="@+id/interval_label_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/interval_label"
-        android:layout_alignBottom="@+id/interval_label"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/server"
+            android:ems="10"
+            android:hint="@string/hint_username"
+            android:inputType="text" />
 
-    <TextView
-        android:id="@+id/interval_label_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/interval_label_current"
-        android:layout_toRightOf="@+id/interval_label_current"
-        android:text="@string/interval_unit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/user"
+            android:ems="10"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/file_prefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/password"
+            android:ems="10"
+            android:hint="@string/filename_prefix"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/file_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/file_prefix"
+            android:ems="10"
+            android:hint="@string/directory"
+            android:inputType="text" />
+
+        <SeekBar
+            android:id="@+id/interval_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/file_dir"
+            android:layout_marginTop="62dp"
+            android:max="60"
+            android:progress="5" />
+
+        <TextView
+            android:id="@+id/interval_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/interval_bar"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="26dp"
+            android:text="@string/text_interval"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/interval_label_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/interval_label"
+            android:layout_alignBottom="@+id/interval_label"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/interval_label_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/interval_label_current"
+            android:layout_toRightOf="@+id/interval_label_current"
+            android:text="@string/interval_unit"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/interval_bar"
+            android:layout_marginBottom="18dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/button_capture" />
+    </RelativeLayout>
+
+</ScrollView>

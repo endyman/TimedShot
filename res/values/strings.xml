@@ -13,5 +13,7 @@
     <string name="text_off">off</string>
     <string name="title_activity_capture">CaptureActivity</string>
     <string name="cd_preview_image">preview image</string>
+    <string name="filename_prefix">filename prefix</string>
+    <string name="directory">directory</string>
 
 </resources>

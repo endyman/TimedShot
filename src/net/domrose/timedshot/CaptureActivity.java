@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,17 +13,14 @@ import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.support.v4.app.NavUtils;
 
 public class CaptureActivity extends Activity {
 		
 	private final static Integer INITAL_CAPTURE_DELAY = 3000;
-	private static final boolean SCALE_IMAGE = false;
-	private final static Integer IMAGE_WIDTH = 1024;
-	private final static Integer IMAGE_HEIGHT = 768;
+	private static final boolean SCALE_IMAGE = true;
+	private final static Integer IMAGE_WIDTH = 1280;
+	private final static Integer IMAGE_HEIGHT = 960;
 	
 	protected static final String TAG = "CaptureActivity";
 	

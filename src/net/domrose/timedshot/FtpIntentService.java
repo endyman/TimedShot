@@ -37,6 +37,8 @@ public class FtpIntentService extends IntentService {
 			String server = mainsettings.getString(MainActivity.PREFS_SERVER, "");
 			String user = mainsettings.getString(MainActivity.PREFS_USER, "");
 			String password = mainsettings.getString(MainActivity.PREFS_PASSWORD, "");
+			String dir_name = mainsettings.getString(MainActivity.PREFS_FILE_DIR, REMOTE_DIRECTORY);
+			String file_name = mainsettings.getString(MainActivity.PREFS_FILE_PREFIX, REMOTE_FILE_PREFIX);
 			Log.d(TAG, "Server: " + server + " user: " + user + " pass: ***" );
 			
 			if (user.equals("")){
@@ -51,9 +53,9 @@ public class FtpIntentService extends IntentService {
 				if (mFtp.login(user, password)){
 					mFtp.setFileType(FTP.BINARY_FILE_TYPE);
 					mFtp.enterLocalPassiveMode();
-					mFtp.changeWorkingDirectory(REMOTE_DIRECTORY);
+					mFtp.changeWorkingDirectory(dir_name);
 					InputStream is = new ByteArrayInputStream(data);
-					Boolean success = mFtp.storeFile(REMOTE_FILE_PREFIX + getDateTimeStamp() + ".jpg", is);
+					Boolean success = mFtp.storeFile(file_name + ".jpg", is);
 					is.close();
 					mFtp.disconnect();
 					if (success == true){

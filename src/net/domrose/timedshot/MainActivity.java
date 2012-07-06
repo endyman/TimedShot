@@ -20,6 +20,8 @@ public class MainActivity extends Activity {
 	protected final static String PREFS_USER = "user";
 	protected final static String PREFS_PASSWORD = "password";
 	protected final static String PREFS_INTERVAL = "interval";
+	protected final static String PREFS_FILE_PREFIX = "file_prefix";
+	protected final static String PREFS_FILE_DIR = "file_dir";
 	
 	public final static String EXTRA_INTERVAL = "interval";
 	
@@ -29,6 +31,8 @@ public class MainActivity extends Activity {
 	private EditText mServerField;
 	private EditText mUserField;
 	private EditText mPasswordField;
+	private EditText mFilePrefixField;
+	private EditText mFileDir;
 	private Button mCaptureButton;
 	private SharedPreferences mainSettings;
 	private Editor editor;
@@ -49,6 +53,10 @@ public class MainActivity extends Activity {
         mUserField = (EditText) findViewById(R.id.user);
         
         mPasswordField = (EditText) findViewById(R.id.password);
+        
+        mFilePrefixField = (EditText) findViewById(R.id.file_prefix);
+
+        mFileDir = (EditText) findViewById(R.id.file_dir);
         
         mCaptureButton = (Button) findViewById(R.id.capture);
         
@@ -101,6 +109,8 @@ public class MainActivity extends Activity {
     	editor.putString(PREFS_USER, mUserField.getText().toString());
     	editor.putString(PREFS_PASSWORD, mPasswordField.getText().toString());
     	editor.putInt(PREFS_INTERVAL, mIntervalSeekBar.getProgress());
+    	editor.putString(PREFS_FILE_PREFIX, mFilePrefixField.getText().toString());
+    	editor.putString(PREFS_FILE_DIR, mFileDir.getText().toString());
     	editor.commit();
 
     }
@@ -110,6 +120,8 @@ public class MainActivity extends Activity {
     	mUserField.setText(mainSettings.getString(PREFS_USER, ""));
     	mPasswordField.setText(mainSettings.getString(PREFS_PASSWORD, ""));
     	mIntervalSeekBar.setProgress(mainSettings.getInt(PREFS_INTERVAL, 5));
+    	mFilePrefixField.setText(mainSettings.getString(PREFS_FILE_PREFIX, ""));
+    	mFileDir.setText(mainSettings.getString(PREFS_FILE_DIR, ""));
     }
     
     @Override

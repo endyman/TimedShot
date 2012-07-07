@@ -15,5 +15,7 @@
     <string name="cd_preview_image">preview image</string>
     <string name="filename_prefix">filename prefix</string>
     <string name="directory">directory</string>
+    <string name="label_add_overlay_info">add overlay info</string>
+    <string name="label_file_has_timestamp">file has timestamp</string>
 
 </resources>

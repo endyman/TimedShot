@@ -48,6 +48,8 @@ public class CaptureActivity extends Activity {
 	private CameraPreview mPreview;
 	private Timer mTimer;
 	private Integer mInterval;
+	private Boolean mUseOverlay;
+	private Boolean mUseTimestamp;
 	private PowerManager.WakeLock mWakeLock;
 	private FrameLayout mPreviewHolder;
 	
@@ -61,6 +63,8 @@ public class CaptureActivity extends Activity {
         setContentView(R.layout.activity_capture);
         mPreviewHolder = (FrameLayout) findViewById(R.id.camera_preview);
         mInterval = getIntent().getExtras().getInt(MainActivity.EXTRA_INTERVAL);
+        mUseOverlay = getIntent().getExtras().getBoolean(MainActivity.EXTRA_USE_OVERLAY);
+        mUseTimestamp = getIntent().getExtras().getBoolean(MainActivity.EXTRA_USE_TIMESTAMP);
         mWakeLock = getWakeLock();
     }
 	 
@@ -219,48 +223,55 @@ public class CaptureActivity extends Activity {
      */
     private void processImageData(byte[] data){
     	
-    	Bitmap cameraBitmap = BitmapFactory.decodeByteArray
-                (data, 0, data.length);
-    	int wid = cameraBitmap.getWidth();
-        int hgt = cameraBitmap.getHeight();
-        
-        // create new image
-        Bitmap newImage = Bitmap.createBitmap
-                (wid, hgt, Bitmap.Config.ARGB_8888);
+    	if (mUseOverlay){
+        	Bitmap cameraBitmap = BitmapFactory.decodeByteArray
+                    (data, 0, data.length);
+        	int wid = cameraBitmap.getWidth();
+            int hgt = cameraBitmap.getHeight();
+            
+            // create new image
+            Bitmap newImage = Bitmap.createBitmap
+                    (wid, hgt, Bitmap.Config.ARGB_8888);
 
-        Canvas canvas = new Canvas(newImage);
-        canvas.drawBitmap(cameraBitmap, 0f, 0f, null);
-        Paint paint = new Paint(); 
-        paint.setColor(Color.TRANSPARENT); 
-        paint.setStyle(Style.FILL); 
-        canvas.drawPaint(paint); 
+            Canvas canvas = new Canvas(newImage);
+            canvas.drawBitmap(cameraBitmap, 0f, 0f, null);
+            Paint paint = new Paint(); 
+            paint.setColor(Color.TRANSPARENT); 
+            paint.setStyle(Style.FILL); 
+            canvas.drawPaint(paint); 
 
-        paint.setColor(Color.WHITE); 
-        paint.setTextSize(14);
-        
-        // create timestamp
-        String timestamp = DateFormat.format("dd/MM/yyyy hh:mm:ss", new Date()).toString();
-        
-        // get battery status
-        Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        double temp = batteryIntent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1) / 10;
-        
-        // draw overlay
-        canvas.drawText(timestamp , wid - 150, hgt - 100, paint);
-        canvas.drawText("Battery: " + level , wid - 150, hgt - 79, paint);
-        canvas.drawText("Temp:. " + temp , wid - 150, hgt - 58, paint);
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
+            paint.setColor(Color.WHITE); 
+            paint.setTextSize(14);
+            
+            // create timestamp
+            String timestamp = DateFormat.format("dd/MM/yyyy hh:mm:ss", new Date()).toString();
+            
+            // get battery status
+            Intent batteryIntent = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            double temp = batteryIntent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1) / 10;
+            
+            // draw overlay
+            canvas.drawText(timestamp , wid - 150, hgt - 100, paint);
+            canvas.drawText("Battery: " + level , wid - 150, hgt - 79, paint);
+            canvas.drawText("Temp:. " + temp , wid - 150, hgt - 58, paint);
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
 
-        newImage.compress(Bitmap.CompressFormat.JPEG, 100, output);
-    	TimedShotApp.setCaptureImage(output.toByteArray());
-    	newImage.recycle();
-    	newImage = null;
-    	cameraBitmap.recycle();
-    	cameraBitmap = null;
-    	canvas = null;
-    	paint = null;
-    	
+            newImage.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        	TimedShotApp.setCaptureImage(output.toByteArray());
+        	
+        	// clean up
+        	newImage.recycle();
+        	newImage = null;
+        	cameraBitmap.recycle();
+        	cameraBitmap = null;
+        	canvas = null;
+        	paint = null;
+    		
+    	}else{
+        	TimedShotApp.setCaptureImage(data);
+    	}
+
     	// upload the image
     	startFtpIntent();
     }

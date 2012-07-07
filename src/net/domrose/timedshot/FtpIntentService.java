@@ -14,6 +14,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 public class FtpIntentService extends IntentService {
@@ -39,14 +40,21 @@ public class FtpIntentService extends IntentService {
 			String password = mainsettings.getString(MainActivity.PREFS_PASSWORD, "");
 			String dir_name = mainsettings.getString(MainActivity.PREFS_FILE_DIR, REMOTE_DIRECTORY);
 			String file_name = mainsettings.getString(MainActivity.PREFS_FILE_PREFIX, REMOTE_FILE_PREFIX);
+			Boolean useTimestamp = mainsettings.getBoolean(MainActivity.PREFS_USE_TIMESTAMP, false);
 			Log.d(TAG, "Server: " + server + " user: " + user + " pass: ***" );
 			
-			if (user.equals("")){
-				user = "ftp";
+			// append timestamp to filename
+			if (useTimestamp == true){
+	            String timestamp = DateFormat.format("yyyyMMddhhmmss", new Date()).toString();
+	            file_name = file_name + "_" + timestamp;
 			}
-			if (password.equals("")){
+			
+			// use anonymous ftp user if no user provided
+			if (user.equals("") || password.equals("")){
+				user = "ftp";
 				password = "ftp";
 			}
+			
 			FTPClient mFtp = new FTPClient();
 			try {
 				mFtp.connect(server);
@@ -75,12 +83,4 @@ public class FtpIntentService extends IntentService {
 			}	
 		}
 	}
-	
-	private String getDateTimeStamp(){
-		final Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(System.currentTimeMillis());
-		Date date = cal.getTime();
-		return "" + date.getYear() +""+  date.getMonth() +""+ date.getDate() + "" + date.getHours() + "" + date.getMinutes();
-	}
-
 }

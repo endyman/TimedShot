@@ -7,68 +7,113 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true" >
 
-        <EditText
-            android:id="@+id/server"
+        <LinearLayout
+            android:id="@+id/settings_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="67dp"
-            android:ems="10"
-            android:hint="@string/hint_server_address"
-            android:inputType="text" >
-        </EditText>
+            android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/server"
-            android:ems="10"
-            android:hint="@string/hint_username"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/server"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/hint_server_address"
+                android:inputType="text" >
+            </EditText>
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/user"
-            android:ems="10"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/hint_username"
+                android:inputType="text" />
 
-        <EditText
-            android:id="@+id/file_prefix"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/password"
-            android:ems="10"
-            android:hint="@string/filename_prefix"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/file_dir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/file_prefix"
-            android:ems="10"
-            android:hint="@string/directory"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/file_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/filename_prefix"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/file_dir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="@string/directory"
+                android:inputType="text" />
+
+            <LinearLayout
+                android:id="@+id/container_timestamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true" >
+
+                <TextView
+                    android:id="@+id/label_timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/label_file_has_timestamp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ToggleButton
+                    android:id="@+id/toggle_timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true" >
+
+                <TextView
+                    android:id="@+id/label_overlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/label_add_overlay_info"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ToggleButton
+                    android:id="@+id/toggle_overlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+        </LinearLayout>
 
         <SeekBar
             android:id="@+id/interval_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/file_dir"
+            android:layout_below="@+id/settings_container"
             android:layout_marginTop="62dp"
             android:max="60"
             android:progress="5" />

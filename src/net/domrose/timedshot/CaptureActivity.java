@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.PowerManager;
 import android.app.Activity;
 import android.content.Context;

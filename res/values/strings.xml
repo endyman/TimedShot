@@ -17,5 +17,8 @@
     <string name="directory">directory</string>
     <string name="label_add_overlay_info">add overlay info</string>
     <string name="label_file_has_timestamp">file has timestamp</string>
+    <string name="hello">TODO</string>
+    <string name="btn_show">TODO</string>
+    <string name="btn_sleep">TODO</string>
 
 </resources>
